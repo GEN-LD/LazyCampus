@@ -1,8 +1,10 @@
-package scut.toothpick.lazycampus;
+package scut.toothpick.lazycampus.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import scut.toothpick.lazycampus.BottomBar;
+import scut.toothpick.lazycampus.R;
 import scut.toothpick.lazycampus.fragment.FindFragment;
 import scut.toothpick.lazycampus.fragment.MineFragment;
 import scut.toothpick.lazycampus.fragment.NewsFragment;

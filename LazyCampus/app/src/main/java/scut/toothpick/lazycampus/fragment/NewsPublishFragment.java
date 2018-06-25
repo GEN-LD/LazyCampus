@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scut.toothpick.lazycampus.R;
-import scut.toothpick.lazycampus.adapter.TaskAdapter;
+import scut.toothpick.lazycampus.adapter.NewsTaskAdapter;
 import scut.toothpick.lazycampus.entity.Task;
 
 
@@ -42,7 +42,7 @@ public class NewsPublishFragment extends Fragment {
         RecyclerView publishRecyclerView = (RecyclerView)view.findViewById(R.id.publishRecyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         publishRecyclerView.setLayoutManager(manager);
-        TaskAdapter adapter = new TaskAdapter(taskList);
+        NewsTaskAdapter adapter = new NewsTaskAdapter(taskList);
         publishRecyclerView.setAdapter(adapter);
 
         return view;

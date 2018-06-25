@@ -1,7 +1,5 @@
 package scut.toothpick.lazycampus.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +14,6 @@ import java.util.List;
 
 import scut.toothpick.lazycampus.R;
 import scut.toothpick.lazycampus.adapter.MyReceiveAdapter;
-import scut.toothpick.lazycampus.adapter.TaskAdapter;
 import scut.toothpick.lazycampus.entity.Task;
 
 
