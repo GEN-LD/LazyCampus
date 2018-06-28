@@ -122,7 +122,8 @@
                 android:id="@+id/task_detail_edtext"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"/>
+                android:layout_weight="8"
+                android:hint="留言"/>
             <Button
                 android:id="@+id/task_detail_sendbt"
                 android:layout_width="0dp"
