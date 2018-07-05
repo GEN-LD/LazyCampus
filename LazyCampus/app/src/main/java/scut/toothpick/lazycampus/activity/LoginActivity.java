@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -28,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button signin;
     private ProgressDialog dialog;
+
+    private TextView register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,15 @@ public class LoginActivity extends AppCompatActivity {
                 sendSigninReq();
             }
         });
+        register = (TextView)findViewById(R.id.login_register);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void sendSigninReq() {
         String id = student_id.getText().toString();
