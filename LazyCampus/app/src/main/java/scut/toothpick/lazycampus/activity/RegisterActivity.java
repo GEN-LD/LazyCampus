@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,8 +31,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText phone;
     private EditText school;
     private EditText college;
+    private EditText email;
     private Button register;
-
+    private RadioButton man;
 
     private ProgressDialog dialog;
 
@@ -48,6 +50,8 @@ public class RegisterActivity extends AppCompatActivity {
         phone = findViewById(R.id.regi_phone);
         school = findViewById(R.id.regi_school);
         college = findViewById(R.id.regi_college);
+        man = findViewById(R.id.regi_man);
+        email = findViewById(R.id.regi_email);
         register = findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +69,26 @@ public class RegisterActivity extends AppCompatActivity {
         String sphone = phone.getText().toString();
         String sschool = school.getText().toString();
         String scollege = college.getText().toString();
+        String semail = email.getText().toString();
         if(sname.equals("")||sid.equals("")||spassword.equals("")||sphone.equals("")){
             Toast.makeText(RegisterActivity.this,"信息填写未完整，请完善信息！",Toast.LENGTH_SHORT).show();
         } else {
-            sendHttpRegisterReq(sname,sid,spassword,sphone,sschool,scollege);
+            dialog = new ProgressDialog(RegisterActivity.this);
+            dialog.setTitle("注册账号中");
+            dialog.setMessage("Loading...");
+            dialog.setCancelable(false);
+            dialog.show();
+            int sex = 0;
+            if(man.isChecked()){
+                sex = 1;
+            }
+            sendHttpRegisterReq(sname,sid,spassword,sphone,sschool,scollege,sex,semail);
         }
     }
 
-    private void sendHttpRegisterReq(final String sname, final String sid, final String spassword, final String sphone, final String sschool, final String scollege) {
+    private void sendHttpRegisterReq(final String sname, final String sid, final String spassword,
+                                     final String sphone, final String sschool, final String scollege,
+                                     final int sex,final String email) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -82,11 +98,13 @@ public class RegisterActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
                             .add("name",sname)
-                            .add("id",sid)
+                            .add("student_id",sid)
                             .add("password",spassword)
-                            .add("phone",sphone)
+                            .add("phone_number",sphone)
                             .add("school",ss)
                             .add("college",sc)
+                            .add("email",email)
+                            .add("sex", String.valueOf(sex))
                             .build();
                     Request request = new Request.Builder()
                             .url("http://123.56.13.200/Toothpick/Home/Campus/register")
@@ -95,27 +113,31 @@ public class RegisterActivity extends AppCompatActivity {
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
                     Log.d(TAG, ""+data);
-//                    ResultBean bean = new Gson().fromJson(data,ResultBean.class);
-//                    if(bean.getMsg().equals("success")){
-//                        dialog.dismiss();
-//                        Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Toast.makeText(RegisterActivity.this,"登录成功！",Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                        finish();
-//                    } else {
-//                        dialog.dismiss();
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Toast.makeText(RegisterActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
+                    ResultBean bean = new Gson().fromJson(data,ResultBean.class);
+                    dialog.dismiss();
+                    if(bean.getCode() == 2){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegisterActivity.this,"注册失败！用户已存在，无需再次注册",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else if (bean.getCode() == 0) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegisterActivity.this,"注册成功！请用新账号登录",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        finish();
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegisterActivity.this,"注册失败！请再重试一次",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 } catch (Exception e){
                     e.printStackTrace();
                 }

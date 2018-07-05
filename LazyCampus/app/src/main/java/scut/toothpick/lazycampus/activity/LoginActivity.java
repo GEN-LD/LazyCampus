@@ -94,8 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                     String data = response.body().string();
                     Log.d(TAG, ""+data);
                     ResultBean bean = new Gson().fromJson(data,ResultBean.class);
+                    dialog.dismiss();
                     if(bean.getMsg().equals("success")){
-                        dialog.dismiss();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         runOnUiThread(new Runnable() {
