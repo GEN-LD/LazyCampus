@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -59,8 +61,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void sendSigninReq() {
-        String id = student_id.getText().toString();
-        String pswd = password.getText().toString();
+//        String id = student_id.getText().toString();
+//        String pswd = password.getText().toString();
+        String id = "201566612138";
+        String pswd = "123456";
+
         Log.d(TAG, "id:"+id+"  password:"+pswd);
         if(id.equals("")){
             Toast.makeText(LoginActivity.this,"请输入id",Toast.LENGTH_SHORT).show();
@@ -92,11 +97,21 @@ public class LoginActivity extends AppCompatActivity {
                             .build();
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
+                    JSONObject dataObject = new JSONObject(data);
+                    String student = dataObject.getString("student");
+                    String task = dataObject.getString("task");
+                    String service = dataObject.getString("service");
                     Log.d(TAG, ""+data);
+                    Log.d(TAG, student);
+                    Log.d(TAG, task);
+                    Log.d(TAG, service);
                     ResultBean bean = new Gson().fromJson(data,ResultBean.class);
                     dialog.dismiss();
                     if(bean.getMsg().equals("success")){
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        intent.putExtra("task",task);
+                        intent.putExtra("service",service);
+                        intent.putExtra("user",student);
                         startActivity(intent);
                         runOnUiThread(new Runnable() {
                             @Override

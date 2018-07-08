@@ -1,5 +1,6 @@
 package scut.toothpick.lazycampus.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import scut.toothpick.lazycampus.R;
-import scut.toothpick.lazycampus.entity.Task;
+import scut.toothpick.lazycampus.activity.TaskDetailActivity;
+import scut.toothpick.lazycampus.bean.TaskBean;
+import scut.toothpick.lazycampus.entity.AllState;
 
 /**
  * Created by dgliang on 2018/6/21.
@@ -19,7 +24,7 @@ import scut.toothpick.lazycampus.entity.Task;
 
 public class NewsTaskAdapter extends RecyclerView.Adapter<NewsTaskAdapter.PublishViewHolder> {
 
-    private List<Task> mTask = new ArrayList<>();
+    private List<TaskBean> mTaskBean = new ArrayList<>();
 
     static class PublishViewHolder extends RecyclerView.ViewHolder {
         View taskView;
@@ -39,12 +44,12 @@ public class NewsTaskAdapter extends RecyclerView.Adapter<NewsTaskAdapter.Publis
         }
     }
     //构造方法
-    public NewsTaskAdapter(List<Task> taskList) {
-        mTask = taskList;
+    public NewsTaskAdapter(List<TaskBean> taskBeanList) {
+        mTaskBean = taskBeanList;
     }
 
     @Override
-    public PublishViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PublishViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_publish,parent,false);
         final PublishViewHolder viewHolder = new PublishViewHolder(view);
 
@@ -53,6 +58,9 @@ public class NewsTaskAdapter extends RecyclerView.Adapter<NewsTaskAdapter.Publis
             public void onClick(View view) {
                 int position = viewHolder.getAdapterPosition();
                 Toast.makeText(view.getContext(),"点击了第 "+position+" 个",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(parent.getContext(), TaskDetailActivity.class);
+                intent.putExtra("taskDetail",new Gson().toJson(mTaskBean.get(position)));
+                parent.getContext().startActivity(intent);
             }
         });
 
@@ -61,17 +69,17 @@ public class NewsTaskAdapter extends RecyclerView.Adapter<NewsTaskAdapter.Publis
 
     @Override
     public void onBindViewHolder(PublishViewHolder holder, int position) {
-        Task task = mTask.get(position);
+        TaskBean taskBean = mTaskBean.get(position);
         // TODO: 2018/6/21 暂时使用默认数据，以后要改
-        holder.publishType.setText("取快递");
-        holder.publishContent.setText("12点前二饭马路边取两个快递");
-        holder.publishState.setText("进行中");
-        holder.publishIsReceive.setText("执行:牙签盒");
+        holder.publishType.setText(AllState.title[Integer.parseInt(mTaskBean.get(position).getType())]);
+        holder.publishContent.setText(mTaskBean.get(position).getContent());
+        holder.publishState.setText(AllState.taskState[Integer.parseInt(mTaskBean.get(position).getState())]);
+        holder.publishIsReceive.setText("发布:"+mTaskBean.get(position).getPublish_id());
     }
 
     @Override
     public int getItemCount() {
-        return mTask.size();
+        return mTaskBean.size();
     }
 
 }

@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scut.toothpick.lazycampus.R;
-import scut.toothpick.lazycampus.entity.LCService;
-import scut.toothpick.lazycampus.entity.Task;
+import scut.toothpick.lazycampus.bean.ServiceBean;
+import scut.toothpick.lazycampus.bean.TaskBean;
+import scut.toothpick.lazycampus.entity.AllState;
 
 /**
  * Created by dgliang on 2018/6/21.
@@ -19,8 +20,8 @@ import scut.toothpick.lazycampus.entity.Task;
 
 public class MyReceiveAdapter extends RecyclerView.Adapter<MyReceiveAdapter.MyReceiveViewHolder>{
 
-    private List<Task> mTask = new ArrayList<>();
-    private List<LCService> lcServices = new ArrayList<>();
+    private List<TaskBean> mTaskBean = new ArrayList<>();
+    private List<ServiceBean> serviceBeans = new ArrayList<>();
     static class MyReceiveViewHolder extends RecyclerView.ViewHolder {
         TextView receiveType;
         TextView receiveContent;
@@ -36,8 +37,8 @@ public class MyReceiveAdapter extends RecyclerView.Adapter<MyReceiveAdapter.MyRe
         }
     }
     //构造方法
-    public MyReceiveAdapter(List<Task> taskList) {
-        mTask = taskList;
+    public MyReceiveAdapter(List<TaskBean> taskBeanList) {
+        mTaskBean = taskBeanList;
     }
 
     @Override
@@ -49,17 +50,17 @@ public class MyReceiveAdapter extends RecyclerView.Adapter<MyReceiveAdapter.MyRe
 
     @Override
     public void onBindViewHolder(MyReceiveViewHolder holder, int position) {
-        Task task = mTask.get(position);
+        TaskBean taskBean = mTaskBean.get(position);
         // TODO: 2018/6/21 暂时使用默认数据，以后要改
-        holder.receiveType.setText("去打印");
-        holder.receiveContent.setText("今天可帮忙打印，送货上门");
-        holder.receiveState.setText("进行中");
-        holder.receiveIsReceive.setText("执行:筷子哥");
+        holder.receiveType.setText(AllState.title[Integer.parseInt(mTaskBean.get(position).getType())]);
+        holder.receiveContent.setText(mTaskBean.get(position).getContent());
+        holder.receiveState.setText(AllState.taskState[Integer.parseInt(mTaskBean.get(position).getState())]);
+        holder.receiveIsReceive.setText("执行:"+mTaskBean.get(position).getReceive_id());
     }
 
     @Override
     public int getItemCount() {
-        return mTask.size();
+        return mTaskBean.size();
     }
 
 }

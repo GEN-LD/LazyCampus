@@ -9,42 +9,32 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
-    <TextView
-        android:id="@+id/task_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textColor="#121212"
-        android:text="取快递"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/task_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:textSize="20dp"
+                android:textColor="#121212"
+                android:text="取快递"/>
+            <TextView
+                android:id="@+id/task_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="赏金：-元"/>
+        </LinearLayout>
     <TextView
         android:id="@+id/task_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="在今天17：00前一饭天桥2号柜取两个包裹"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/task_apply_num"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="申请人数：-"/>
-        <TextView
-            android:id="@+id/task_money"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="赏金：-元"/>
-        <TextView
-            android:id="@+id/task_distance"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="发布距离：--"/>
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
