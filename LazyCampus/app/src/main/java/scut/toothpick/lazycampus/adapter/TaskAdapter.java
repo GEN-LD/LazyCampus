@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import scut.toothpick.lazycampus.R;
 import scut.toothpick.lazycampus.activity.TaskDetailActivity;
-import scut.toothpick.lazycampus.entity.Task;
+import scut.toothpick.lazycampus.bean.TaskBean;
+import scut.toothpick.lazycampus.entity.AllState;
 
 /**
  * Created by dgliang on 2018/6/25.
@@ -20,16 +23,14 @@ import scut.toothpick.lazycampus.entity.Task;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
-    private List<Task> mTask;
+    private List<TaskBean> mTaskBean;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View taskView;
 
         TextView task_type;
         TextView task_content;
-        TextView task_apply_num;
         TextView task_money;
-        TextView task_distance;
         TextView task_credit;
         TextView task_deadline;
 
@@ -40,16 +41,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
             task_type = (TextView)view.findViewById(R.id.task_type);
             task_content = (TextView)view.findViewById(R.id.task_content);
-            task_apply_num = (TextView)view.findViewById(R.id.task_apply_num);
             task_money = (TextView)view.findViewById(R.id.task_money);
-            task_distance = (TextView)view.findViewById(R.id.task_distance);
             task_credit = (TextView)view.findViewById(R.id.task_credit);
             task_deadline = (TextView)view.findViewById(R.id.task_deadline);
         }
     }
 
-    public TaskAdapter(List<Task> tasks){
-        mTask = tasks;
+    public TaskAdapter(List<TaskBean> taskBeans){
+        mTaskBean = taskBeans;
     }
 
     @Override
@@ -63,6 +62,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 int position = holder.getAdapterPosition();
                 Toast.makeText(view.getContext(),"点击了第 "+position+" 个",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(parent.getContext(), TaskDetailActivity.class);
+                intent.putExtra("taskDetail",new Gson().toJson(mTaskBean.get(position)));
                 parent.getContext().startActivity(intent);
             }
         });
@@ -72,19 +72,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Task task = mTask.get(position);
-        holder.task_type.setText("取快递");
-        holder.task_content.setText("在今天17：00前一饭天桥2号柜取两个包裹");
-        holder.task_apply_num.setText("申请人数：-");
-        holder.task_money.setText("赏金：-元");
-        holder.task_distance.setText("发布距离：--");
-        holder.task_credit.setText("信用评级：-");
-        holder.task_deadline.setText("任务截止时间：2018/06/20 19:00");
+        TaskBean taskBean = mTaskBean.get(position);
+        holder.task_type.setText(AllState.title[Integer.parseInt(taskBean.getType())]);
+        holder.task_content.setText(taskBean.getContent());
+        holder.task_money.setText("赏金："+taskBean.getMoney()+"元");
+        holder.task_credit.setText("信用评级："+taskBean.getState());
+        holder.task_deadline.setText("发布时间："+taskBean.getPublish_time());
     }
 
     @Override
     public int getItemCount() {
-        return mTask.size();
+        return mTaskBean.size();
     }
 
 }
