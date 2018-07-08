@@ -18,26 +18,31 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp">
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="184dp"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginEnd="7dp"
                 android:layout_weight="1"
+                android:background="@drawable/bg_shape"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name"
+                android:textAlignment="center"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignBottom="@+id/editText"
-                android:layout_toStartOf="@+id/button2"
+                android:layout_height="38dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="103dp"
                 android:layout_weight="1"
                 android:text="信用"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,10 +51,10 @@
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignBottom="@+id/editText"
+                android:layout_height="38dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="18dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:text="附近"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,8 +68,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="12dp"
-            android:elevation="10dp"
-            android:background="@android:color/white">
+            android:background="@drawable/shape_corner"
+            android:elevation="5dp">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -73,7 +78,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="30dp"
-                app:srcCompat="@drawable/tabbar_mine_selected" />
+                android:layout_marginTop="3dp"
+                app:srcCompat="@drawable/head_portrait" />
 
             <LinearLayout
                 android:id="@+id/information"
@@ -174,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="130dp"
                 android:orientation="vertical">
 
@@ -223,10 +229,10 @@
             <ImageView
                 android:id="@+id/go"
                 android:layout_width="64dp"
-                android:layout_height="58dp"
-                android:layout_alignBottom="@+id/taskName"
+                android:layout_height="64dp"
                 android:layout_alignStart="@+id/entrust"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
+                android:layout_below="@+id/entrust"
+                app:srcCompat="@drawable/right_arrow" />
 
             <TextView
                 android:id="@+id/entrust"
@@ -234,6 +240,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/taskName"
+                android:layout_marginBottom="2dp"
                 android:layout_marginEnd="80dp"
                 android:text="快速委托"
                 android:textColor="@android:color/black"
