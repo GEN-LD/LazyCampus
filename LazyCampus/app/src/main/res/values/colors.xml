@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorSoso">#82b3ec</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="border_clo">#ccc</color>
+    <color name="text_clo">#333</color>
+    <color name="blue">#419DE4</color>
+    <color name="red">#ff0008</color>
 </resources>

@@ -6,13 +6,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="184dp"
-        android:text="我的页面"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F0F3F6"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="188dp"
+        tools:ignore="MissingConstraints">
+
+
+        <RelativeLayout
+            android:id="@+id/my_header"
+            android:padding="20dp"
+            style="@style/wrap_layout">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/my_header_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="@null"
+                android:src="@drawable/header_image"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/my_header_image"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_header_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="鲍鱼"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/my_school"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="华南理工大学"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout style="@style/wrap_layout">
+            <!-- 上圆角-->
+            <LinearLayout style="@style/top_layout">
+
+                <TextView
+                    android:id="@+id/my_profile"
+                    style="@style/usertext"
+                    android:text="我的资料" />
+
+                <ImageView style="@style/img_arrow" />
+            </LinearLayout>
+
+            <!-- 分割线 -->
+            <View style="@style/bg_line" />
+            <!-- 无圆角-->
+            <LinearLayout style="@style/mid_layout">
+
+                <TextView
+                    android:id="@+id/my_collection"
+                    style="@style/usertext"
+                    android:text="我的收藏" />
+
+                <ImageView style="@style/img_arrow" />
+            </LinearLayout>
+
+            <View style="@style/bg_line" />
+            <!-- 下圆角-->
+            <LinearLayout style="@style/bottom_layout">
+
+                <TextView
+                    android:id="@+id/browsing_history"
+                    style="@style/usertext"
+                    android:text="浏览历史" />
+
+                <ImageView style="@style/img_arrow" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!-- 全圆角-->
+        <LinearLayout style="@style/wrap_layout">
+
+            <LinearLayout style="@style/single_layout">
+
+                <TextView
+                    android:id="@+id/general_settings"
+                    style="@style/usertext"
+                    android:text="通用设置" />
+
+                <ImageView style="@style/img_arrow" />
+            </LinearLayout>
+
+            <View style="@style/bg_line" />
+
+            <LinearLayout style="@style/single_layout">
+
+                <TextView
+                    android:id="@+id/sign_out"
+                    style="@style/usertext"
+                    android:text="退出登陆" />
+
+                <ImageView style="@style/img_arrow" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
