@@ -54,7 +54,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_weight="0.5"
-                android:text="昵称" />
+                android:text="鲍鱼" />
 
             <ImageView style="@style/img_arrow" />
         </LinearLayout>
