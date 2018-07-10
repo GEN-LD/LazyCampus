@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData(){
         Intent intent = getIntent();
-        String jsonUser = intent.getStringExtra("user");
+        String jsonUser = intent.getStringExtra("user0");
         String jsonTask = intent.getStringExtra("task");
         String jsonService = intent.getStringExtra("service");
         user = new Gson().fromJson(jsonUser,UserBean.class);

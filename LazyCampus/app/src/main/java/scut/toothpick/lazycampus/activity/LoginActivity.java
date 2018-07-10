@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                     String task = dataObject.getString("task");
                     String service = dataObject.getString("service");
                     Log.d(TAG, ""+data);
-                    Log.d(TAG, student);
+                    Log.d(TAG, "用户"+student);
                     Log.d(TAG, task);
                     Log.d(TAG, service);
                     ResultBean bean = new Gson().fromJson(data,ResultBean.class);
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         intent.putExtra("task",task);
                         intent.putExtra("service",service);
-                        intent.putExtra("user",student);
+                        intent.putExtra("user0",student);
                         startActivity(intent);
                         runOnUiThread(new Runnable() {
                             @Override

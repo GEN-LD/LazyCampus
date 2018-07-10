@@ -18,6 +18,7 @@ public class UserBean {
      * college : 软件学院
      * student_id : 201566612138
      * image_path : null
+     * type : null
      */
 
     private String id;
@@ -31,10 +32,11 @@ public class UserBean {
     private String college;
     private String student_id;
     private String image_path;
+    private String type;
 
     public UserBean(String id, String name, String password, String credit, String sex,
                     String phone_number, String email, String school, String college,
-                    String student_id, String image_path) {
+                    String student_id, String image_path, String type) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -46,6 +48,7 @@ public class UserBean {
         this.college = college;
         this.student_id = student_id;
         this.image_path = image_path;
+        this.type = type;
     }
 
     public String getId() {
@@ -134,5 +137,13 @@ public class UserBean {
 
     public void setImage_path(String image_path) {
         this.image_path = image_path;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
