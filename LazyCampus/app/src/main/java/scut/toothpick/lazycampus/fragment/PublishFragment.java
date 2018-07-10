@@ -50,7 +50,7 @@ public class PublishFragment extends Fragment {
 
         Button buttonpublish=view.findViewById(R.id.buttonpublish);
         Button buttonto=view.findViewById(R.id.earnbutton);
-        EditText name=view.findViewById(R.id.editText);
+        //EditText name=view.findViewById(R.id.editText);
         final EditText detail=view.findViewById(R.id.detaileditText);
         final EditText money=view.findViewById(R.id.moneyeditText);
         final EditText time=view.findViewById(R.id.timeeditText);
