@@ -61,7 +61,9 @@
 
         <LinearLayout style="@style/wrap_layout">
             <!-- 上圆角-->
-            <LinearLayout style="@style/top_layout">
+            <LinearLayout
+                android:id="@+id/toProfile"
+                style="@style/top_layout">
 
                 <TextView
                     android:id="@+id/my_profile"
@@ -114,7 +116,9 @@
 
             <View style="@style/bg_line" />
 
-            <LinearLayout style="@style/single_layout">
+            <LinearLayout
+                android:id="@+id/exitLayout"
+                style="@style/single_layout">
 
                 <TextView
                     android:id="@+id/sign_out"

@@ -2,6 +2,7 @@ package scut.toothpick.lazycampus.adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.List;
 import scut.toothpick.lazycampus.R;
 import scut.toothpick.lazycampus.activity.TaskDetailActivity;
 import scut.toothpick.lazycampus.bean.TaskBean;
+import scut.toothpick.lazycampus.bean.UserBean;
 import scut.toothpick.lazycampus.entity.AllState;
 
 /**
@@ -23,8 +25,9 @@ import scut.toothpick.lazycampus.entity.AllState;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
+    public static final String TAG = "任务Adapter";
     private List<TaskBean> mTaskBean;
-
+    private UserBean userBean;
     static class ViewHolder extends RecyclerView.ViewHolder {
         View taskView;
 
@@ -47,8 +50,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         }
     }
 
-    public TaskAdapter(List<TaskBean> taskBeans){
+    public TaskAdapter(List<TaskBean> taskBeans,UserBean user){
         mTaskBean = taskBeans;
+        userBean = user;
+        Log.d(TAG, "适配器里面"+user.getStudent_id());
     }
 
     @Override
@@ -63,6 +68,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 Toast.makeText(view.getContext(),"点击了第 "+position+" 个",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(parent.getContext(), TaskDetailActivity.class);
                 intent.putExtra("taskDetail",new Gson().toJson(mTaskBean.get(position)));
+                Log.d(TAG, "准备传过去"+userBean);
+                intent.putExtra("user",new Gson().toJson(userBean));
                 parent.getContext().startActivity(intent);
             }
         });
