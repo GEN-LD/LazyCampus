@@ -40,8 +40,12 @@ public class PublishFragment extends Fragment {
     public static final String TAG = "发布页面";
     private List<String> data_list;
     private ArrayAdapter<String> arr_adapter;
-    String type;
+    public String type;
 
+    private EditText detail;
+    private EditText money;
+    private EditText time;
+    private Spinner spinner;
 
     @Nullable
     @Override
@@ -51,13 +55,17 @@ public class PublishFragment extends Fragment {
         Button buttonpublish=view.findViewById(R.id.buttonpublish);
         Button buttonto=view.findViewById(R.id.earnbutton);
         //EditText name=view.findViewById(R.id.editText);
-        final EditText detail=view.findViewById(R.id.detaileditText);
-        final EditText money=view.findViewById(R.id.moneyeditText);
-        final EditText time=view.findViewById(R.id.timeeditText);
-        final Spinner spinner=view.findViewById(R.id.typespinner);
+        detail=view.findViewById(R.id.detaileditText);
+        money=view.findViewById(R.id.moneyeditText);
+        time=view.findViewById(R.id.timeeditText);
+        spinner=view.findViewById(R.id.typespinner);
         data_list = new ArrayList<String>();
         data_list.add("取快递");
+        data_list.add("打印");
         data_list.add("拿外卖");
+        data_list.add("代课");
+        data_list.add("分享资料");
+        data_list.add("其他");
         data_list.add("课程辅导");
         //适配器
         arr_adapter= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data_list);
@@ -125,12 +133,26 @@ public class PublishFragment extends Fragment {
                     Response response=client.newCall(request).execute();
                     String resposeData=response.body().string();
                     ResultBean bean = new Gson().fromJson(resposeData,ResultBean.class);
+
                     if(bean.getMsg().equals("success")) {
-//                        Toast.makeText(getContext(),"发布成功！",Toast.LENGTH_SHORT).show();
+
                         Log.d(TAG, "发布成功");
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getContext(),"发布成功！",Toast.LENGTH_SHORT).show();
+                                detail.setText("");
+                                money.setText("");
+                            }
+                        });
                     } else {
-//                        Toast.makeText(getContext(),"发布失败！",Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "发布失败");
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                               Toast.makeText(getContext(),"发布失败！请检查网络重试一遍",Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                     Log.d(TAG, resposeData);
                 }
@@ -140,4 +162,5 @@ public class PublishFragment extends Fragment {
             }
         }).start();
     }
+
 }

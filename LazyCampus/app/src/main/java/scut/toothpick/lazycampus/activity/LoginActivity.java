@@ -61,10 +61,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void sendSigninReq() {
-//        String id = student_id.getText().toString();
-//        String pswd = password.getText().toString();
-        String id = "201566612138";
-        String pswd = "123456";
+        String id = student_id.getText().toString();
+        String pswd = password.getText().toString();
+//        String id = "201566612138";
+//        String pswd = "123456";
 
         Log.d(TAG, "id:"+id+"  password:"+pswd);
         if(id.equals("")){
@@ -101,6 +101,8 @@ public class LoginActivity extends AppCompatActivity {
                     String student = dataObject.getString("student");
                     String task = dataObject.getString("task");
                     String service = dataObject.getString("service");
+                    String user_list_json = dataObject.getString("user_list");
+                    Log.d(TAG, "所有用户"+user_list_json);
                     Log.d(TAG, ""+data);
                     Log.d(TAG, "用户"+student);
                     Log.d(TAG, task);
@@ -112,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("task",task);
                         intent.putExtra("service",service);
                         intent.putExtra("user0",student);
+                        intent.putExtra("user_list",user_list_json);
                         startActivity(intent);
                         runOnUiThread(new Runnable() {
                             @Override

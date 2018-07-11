@@ -25,6 +25,7 @@ public class NewsPublishFragment extends Fragment {
     public static final String TAG = "消息发布页面";
     private List<TaskBean> mTaskBean = new ArrayList<>();
     private List<TaskBean> myTask = new ArrayList<>();
+    private List<UserBean> alluser = new ArrayList<>();
     private UserBean userBean;
 
     private View view;
@@ -51,7 +52,7 @@ public class NewsPublishFragment extends Fragment {
         RecyclerView publishRecyclerView = (RecyclerView)view.findViewById(R.id.publishRecyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         publishRecyclerView.setLayoutManager(manager);
-        NewsTaskAdapter adapter = new NewsTaskAdapter(myTask);
+        NewsTaskAdapter adapter = new NewsTaskAdapter(myTask,alluser,userBean);
         publishRecyclerView.setAdapter(adapter);
 
         return view;
@@ -69,6 +70,7 @@ public class NewsPublishFragment extends Fragment {
         MainActivity mainActivity = (MainActivity)getActivity();
         mTaskBean = mainActivity.getTaskBeanList();
         userBean = mainActivity.getUser();
+        alluser = mainActivity.getAlluser();
         Log.d(TAG,"mTaskBean数量 "+mTaskBean.size());
     }
 }

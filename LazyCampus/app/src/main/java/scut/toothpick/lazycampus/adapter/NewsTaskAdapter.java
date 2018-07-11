@@ -16,6 +16,7 @@ import java.util.List;
 import scut.toothpick.lazycampus.R;
 import scut.toothpick.lazycampus.activity.TaskDetailActivity;
 import scut.toothpick.lazycampus.bean.TaskBean;
+import scut.toothpick.lazycampus.bean.UserBean;
 import scut.toothpick.lazycampus.entity.AllState;
 
 /**
@@ -25,6 +26,8 @@ import scut.toothpick.lazycampus.entity.AllState;
 public class NewsTaskAdapter extends RecyclerView.Adapter<NewsTaskAdapter.PublishViewHolder> {
 
     private List<TaskBean> mTaskBean = new ArrayList<>();
+    private List<UserBean> alluser = new ArrayList<>();
+    private UserBean userBean;
 
     static class PublishViewHolder extends RecyclerView.ViewHolder {
         View taskView;
@@ -44,8 +47,10 @@ public class NewsTaskAdapter extends RecyclerView.Adapter<NewsTaskAdapter.Publis
         }
     }
     //构造方法
-    public NewsTaskAdapter(List<TaskBean> taskBeanList) {
+    public NewsTaskAdapter(List<TaskBean> taskBeanList,List<UserBean> userBeans,UserBean userBean) {
         mTaskBean = taskBeanList;
+        alluser = userBeans;
+        this.userBean = userBean;
     }
 
     @Override
@@ -60,6 +65,7 @@ public class NewsTaskAdapter extends RecyclerView.Adapter<NewsTaskAdapter.Publis
                 Toast.makeText(view.getContext(),"点击了第 "+position+" 个",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(parent.getContext(), TaskDetailActivity.class);
                 intent.putExtra("taskDetail",new Gson().toJson(mTaskBean.get(position)));
+                intent.putExtra("user",new Gson().toJson(userBean));
                 parent.getContext().startActivity(intent);
             }
         });

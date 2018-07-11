@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public UserBean user;
     public List<TaskBean> taskBeanList = new ArrayList<>();
     public List<ServiceBean> serviceBeanList = new ArrayList<>();
+    public List<UserBean> alluser = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
         String jsonUser = intent.getStringExtra("user0");
         String jsonTask = intent.getStringExtra("task");
         String jsonService = intent.getStringExtra("service");
+        String json_user_list = intent.getStringExtra("user_list");
         user = new Gson().fromJson(jsonUser,UserBean.class);
+        alluser = new Gson().fromJson(json_user_list,new TypeToken<List<UserBean>>(){}.getType());
         taskBeanList = new Gson().fromJson(jsonTask,new TypeToken<List<TaskBean>>(){}.getType());
         serviceBeanList = new Gson().fromJson(jsonService,new TypeToken<List<ServiceBean>>(){}.getType());
         Log.d(TAG, String.valueOf(taskBeanList.size()));
@@ -63,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
     public UserBean getUser() {
         return user;
+    }
+
+    public List<UserBean> getAlluser() {
+        return alluser;
     }
 
     private void initFragment(){
